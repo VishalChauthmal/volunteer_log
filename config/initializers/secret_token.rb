@@ -9,6 +9,7 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
+# VolunteerApp::Application.config.secret_key_base = '9dfb3aa5dd0a5c06184f0c3cff0b0bf8a66f3d5f93f331f5a9429a1e10d767859fbd9f603be9651a9541e2f79afa933e4d78d23476d2847855f9f8bb26c26695'
 
 require 'securerandom'
 
