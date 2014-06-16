@@ -1,6 +1,9 @@
 module SessionsHelper
 
 	def sign_in(user)
+		# remember_token changed to rem_token as it was giving the error on heroku (production): 
+		# NoMethodError (undefined method `remember_token=' for #<User:0x007f511c1c8df0>)
+		# remember_token works fine in development environment though.
 		rem_token = User.new_remember_token
 		cookies.permanent[:remember_token] = rem_token
 		user.update_attribute(:remember_token, User.digest(rem_token))
