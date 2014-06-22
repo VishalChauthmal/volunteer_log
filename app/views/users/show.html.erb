@@ -1,10 +1,11 @@
 <% provide(:title, @user.name) %>
 <div class="row">
-	<aside class="span4">
+	<aside class="span6">
 		<section>
 			<h1>
 				<%= image_tag("atmalogo.jpg", alt: "Profile Photo", class: "pic") %>
-				<%= @user.name %>
+				<p>Volunteer Name: <%= @user.name %></p>
+				<p>Organization: <%= Org.find(@user.org_id).org_name unless @user.org_id.blank? %></p>
 			</h1>
 		</section>
 	</aside>

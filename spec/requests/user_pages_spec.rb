@@ -32,6 +32,7 @@ describe "User pages" do
 			before do
 				fill_in "Name", with: "Example L"
 				fill_in "Email", with: "vol@atmaexample.com"
+				# Commented & made org_id optional as it has issues with select: fill_in "Organization", with: 1
 				fill_in "Password", with: "foobar"
 				fill_in "Confirm Password", with: "foobar"
 			end
@@ -72,10 +73,12 @@ describe "User pages" do
 		describe "with valid information" do
 			let(:new_name) { "New Vol" }
 			let(:new_email) { "newvol@atmaexample.com" }
+			#let(:new_org_id) { 3 }
 
 			before do
 				fill_in "Name", with: new_name
 				fill_in "Email", with: new_email
+				#Commented & made org_id optional as it has issues with select: fill_in "Organization ID", with: new_org_id
 				fill_in "Password", with: user.password
 				fill_in "Confirm Password", with: user.password
 				click_button "Save Changes"
