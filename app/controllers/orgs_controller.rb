@@ -18,6 +18,7 @@ class OrgsController < ApplicationController
 	end
 
 	def edit
+		@org = Org.find(params[:id])
 	end
 
 	private

@@ -4,9 +4,9 @@ FactoryGirl.define do
 		email "vol@atmaexample.com"
 		password "foobar"
 		password_confirmation "foobar"
-	  	sequence(:org_id) { |n| "#{n}" }
+#	  	sequence(:org_id) { |n| "#{n}" }
 
-		org
+#		org
 	end
 
 	factory :org do

@@ -1,2 +1,17 @@
-<h1>Orgs#edit</h1>
-<p>Find me in app/views/orgs/edit.html.erb</p>
+<% provide(:title, 'Edit Organization') %>
+
+<h1>Edit Organization</h1>
+
+<div class="row">
+	<div class="span6 offset3">
+		<%= form_for(@org) do |f| %>
+
+			<%= render 'shared/error_messages', object: f.object %>
+			
+			<%= f.label :org_name, "Organization Name" %>
+			<%= f.text_field :org_name %>
+
+			<%= f.submit "Save Changes", class: "btn btn-large btn-primary" %>
+		<% end %>
+	</div>
+</div>
