@@ -16,6 +16,7 @@ describe User do
 	it { should respond_to(:remember_token) }
 	it { should respond_to(:org_id) }
 	it { should respond_to(:org) }
+	it { should respond_to(:janhours) }
 
 	it { should be_valid }
 
