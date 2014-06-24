@@ -8,6 +8,9 @@ gem 'sprockets', '2.11.0'
 
 gem 'bcrypt-ruby', '3.1.2'
 
+#Table builder for the calendar
+gem "watu_table_builder", :require => "table_builder"
+
 group :development, :test do
   gem 'sqlite3', '1.3.8'
   gem 'rspec-rails', '2.13.1'

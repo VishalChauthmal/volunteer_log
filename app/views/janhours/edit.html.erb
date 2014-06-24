@@ -1,0 +1,20 @@
+<% provide(:title, 'New Log Entry') %>
+
+<h1>Fill In Your Log</h1>
+
+<div class="row">
+	<div class="span6 offset3">
+		<%= form_for(@janhour) do |f| %>
+
+			<%= render 'shared/error_messages', object: f.object %>
+			
+			<%= f.label :date %>
+			<%= f.date_field :date %>
+
+			<%= f.label :numhours, "Number of Hours" %>
+			<%= f.text_field :numhours %>
+
+			<%= f.submit "Submit", class: "btn btn-large btn-primary" %>
+		<% end %>
+	</div>
+</div>

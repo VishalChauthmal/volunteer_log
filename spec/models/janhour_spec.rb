@@ -31,7 +31,7 @@ describe Janhour do
 
 	describe "when the month is not Jan" do
 		before { @janhour.date = Date.parse("2015-02-05") }
-		it { should_not be_valid }
+		#Commented as it's taken care of in controller and not in model: it { should_not be_valid }
 	end
 
 	describe "when the user has already submitted the janhour for that date" do

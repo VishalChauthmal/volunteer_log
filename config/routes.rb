@@ -1,5 +1,6 @@
 VolunteerApp::Application.routes.draw do
 
+  resources :janhours
   resources :orgs
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
