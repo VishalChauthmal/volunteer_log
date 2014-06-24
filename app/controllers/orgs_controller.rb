@@ -1,4 +1,7 @@
 class OrgsController < ApplicationController
+	
+	before_action :signed_in_user, only: [:new, :create, :edit, :update]
+
 	def new
 		@org = Org.new
 	end
@@ -19,6 +22,16 @@ class OrgsController < ApplicationController
 
 	def edit
 		@org = Org.find(params[:id])
+	end
+
+	def update
+		@org = Org.find(params[:id])
+		if @org.update_attributes(org_params)
+			flash[:success] = "Organization Updated!"
+			redirect_to @org
+		else
+			render 'edit'
+		end
 	end
 
 	private
