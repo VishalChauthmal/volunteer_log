@@ -91,4 +91,17 @@ describe "User pages" do
 			specify { expect(user.reload.email).to eq new_email }
 		end
 	end
+
+	describe "Users index" do
+		let(:user) { FactoryGirl.create(:user) }
+		before do
+			sign_in user
+			visit users_path
+		end
+
+		it { should have_title("All Users") }
+		it { should have_content("All Users") }
+		it { should have_selector('ul.users') }
+		it { should have_selector('li', text: user.name) }
+	end
 end
