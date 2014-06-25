@@ -1,5 +1,6 @@
 VolunteerApp::Application.routes.draw do
 
+  resources :febhours
   resources :janhours
   resources :orgs
   resources :users
