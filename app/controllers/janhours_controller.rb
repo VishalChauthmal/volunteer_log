@@ -23,7 +23,7 @@ class JanhoursController < ApplicationController
 	end
 
 	def update
-		#@janhour = Janhour.find(params[:id])
+		@janhour = Janhour.find(params[:id])
 		if @janhour.update_attributes(janhour_params)
 			flash[:success] = "Volunteer Log Updated!"
 			redirect_to janhours_path
@@ -53,8 +53,7 @@ class JanhoursController < ApplicationController
 		end
 
 		def update_correct_month
-			@janhour = Janhour.find(params[:id])
-			if !@janhour.date.nil? && @janhour.date.strftime("%m") != "01"
+			if !params[:janhour][:date].nil? && (Date.parse(params[:janhour][:date])).strftime("%m") != "01"
 				redirect_to janhours_path, notice: "The month is not correct."
 			end
 		end
