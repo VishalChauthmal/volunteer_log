@@ -18,6 +18,7 @@ describe User do
 	it { should respond_to(:org) }
 	it { should respond_to(:janhours) }
 	it { should respond_to(:febhours) }
+	it { should respond_to(:marhours) }
 
 	it { should be_valid }
 

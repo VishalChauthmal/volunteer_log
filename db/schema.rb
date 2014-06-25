@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140625130247) do
+ActiveRecord::Schema.define(version: 20140625154335) do
 
   create_table "febhours", force: true do |t|
     t.integer  "user_id"
@@ -22,6 +22,14 @@ ActiveRecord::Schema.define(version: 20140625130247) do
   end
 
   create_table "janhours", force: true do |t|
+    t.integer  "user_id"
+    t.date     "date"
+    t.float    "numhours"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "marhours", force: true do |t|
     t.integer  "user_id"
     t.date     "date"
     t.float    "numhours"
