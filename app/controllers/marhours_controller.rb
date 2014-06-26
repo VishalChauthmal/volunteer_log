@@ -36,6 +36,7 @@ class MarhoursController < ApplicationController
 	end
 
 	def index
+		@newpath = new_marhour_path
 		@monhours = current_user.marhours
 		@date = params[:year] ? Date.parse(params[:year]) : Date.parse("#{Date.today.strftime("%Y")}-03-01")
 	end

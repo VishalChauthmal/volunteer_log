@@ -10,7 +10,7 @@
 		<% calendar.day(:day_method => :date) do |date, monhours| %>
 			<%= date.day %>
 			<% if monhours.length == 0 %>
-				<ul style="list-style: none"><li><%= link_to "Add", yield(:newpath) %><li></ul>
+				<ul style="list-style: none"><li><%= link_to "Add", @newpath %><li></ul>
 			<% else %>
 				<ul>
 					<% for @monhour in monhours %>

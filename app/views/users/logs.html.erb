@@ -3,16 +3,19 @@
 
 <% @monhours = current_user.janhours %>
 <% @date = params[:year] ? Date.parse(params[:year]) : Date.parse("#{Date.today.strftime("%Y")}-01-01") %>
+<% @newpath = new_janhour_path %>
 <%= render 'janhours/janhours_calendar' %>
 
 <hr>
 
 <% @monhours = current_user.febhours %>
 <% @date = params[:year] ? Date.parse(params[:year]) : Date.parse("#{Date.today.strftime("%Y")}-02-01") %>
+<% @newpath = new_febhour_path %>
 <%= render 'febhours/febhours_calendar' %>
 
 <hr>
 
 <% @monhours = current_user.marhours %>
 <% @date = params[:year] ? Date.parse(params[:year]) : Date.parse("#{Date.today.strftime("%Y")}-03-01") %>
+<% @newpath = new_marhour_path %>
 <%= render 'marhours/marhours_calendar' %>
