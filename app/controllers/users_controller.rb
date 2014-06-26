@@ -41,6 +41,9 @@ class UsersController < ApplicationController
 		@users = User.all
 	end
 
+	def logs
+	end
+
 	private
 
 		def user_params

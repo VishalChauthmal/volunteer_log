@@ -1,0 +1,18 @@
+<% provide(:title, 'All Logs') %>
+<h1>All Logs</h1>
+
+<% @monhours = current_user.janhours %>
+<% @date = params[:year] ? Date.parse(params[:year]) : Date.parse("#{Date.today.strftime("%Y")}-01-01") %>
+<%= render 'janhours/janhours_calendar' %>
+
+<hr>
+
+<% @monhours = current_user.febhours %>
+<% @date = params[:year] ? Date.parse(params[:year]) : Date.parse("#{Date.today.strftime("%Y")}-02-01") %>
+<%= render 'febhours/febhours_calendar' %>
+
+<hr>
+
+<% @monhours = current_user.marhours %>
+<% @date = params[:year] ? Date.parse(params[:year]) : Date.parse("#{Date.today.strftime("%Y")}-03-01") %>
+<%= render 'marhours/marhours_calendar' %>

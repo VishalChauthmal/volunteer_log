@@ -1,40 +1,20 @@
 <% provide(:title, 'All Logs') %>
+<% provide(:newpath, new_febhour_path) %>
+
 <h1>All Logs</h1>
 
-<div id="calendar">
-	<h2 id="month">
-		<%= link_to "<", :year => (@date-1.year).strftime("%Y-%m-01") %>
-		<%= h @date.strftime("%B %Y") %>
-		<%= link_to ">", :year => (@date+1.year).strftime("%Y-%m-01") %>
-	</h2>
-	
-	<%= calendar_for @febhours, :year => @date.year, :month => @date.month do |calendar| %>
-	<%= calendar.head('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday') %>
-		<% calendar.day(:day_method => :date) do |date, febhours| %>
-			<%= date.day %>
-			<% if current_user.febhours.find_by(date: date).nil? %>
-				<ul style="list-style: none"><li><%= link_to "Add", new_febhour_path %><li></ul>
-			<% end %>
-			<ul>
-				<% for febhour in febhours %>
-						<li><%= febhour.user.name %></li>
-						<li><%= febhour.numhours %></li>
-						<li><%= link_to "Edit", edit_febhour_path(febhour) %></li>
-				<% end %>
-			</ul>
-		<% end %>
-	<% end %>
-</div>
+<%= render 'febhours_calendar' %>
+
 
 
 
 <hr>
 <ul>
-	<% @febhours.each do |febhour| %>
+	<% @monhours.each do |monhour| %>
 		<li>
-			<p>Volunteer Name: <%= febhour.user.name %></p>
-			<p>Date: <%= febhour.date %></p>
-			<p>Number of Hours: <%= febhour.numhours %></p>
+			<p>Volunteer Name: <%= monhour.user.name %></p>
+			<p>Date: <%= monhour.date %></p>
+			<p>Number of Hours: <%= monhour.numhours %></p>
 		</li>
 	<% end %>
 </ul>

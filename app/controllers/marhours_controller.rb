@@ -36,7 +36,7 @@ class MarhoursController < ApplicationController
 	end
 
 	def index
-		@marhours = current_user.marhours
+		@monhours = current_user.marhours
 		@date = params[:year] ? Date.parse(params[:year]) : Date.parse("#{Date.today.strftime("%Y")}-03-01")
 	end
 
