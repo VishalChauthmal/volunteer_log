@@ -10,6 +10,7 @@ describe "Static pages" do
 		it { should have_link('Home') }
 		it { should have_title(full_title('')) }
 		it { should_not have_title('| Home') }
+		it { should have_content('Welcome') }
 
 		describe "after siging in" do
 			let(:user) { FactoryGirl.create(:user) }
@@ -19,6 +20,7 @@ describe "Static pages" do
 			end
 
 			it { should_not have_link('Sign Up', href: signup_path) }
+			it { should have_content('Fill In Your Log Below') }
 			it { should have_link('January', href: janhours_path) }
 			it { should have_link('February', href: febhours_path) }
 		end

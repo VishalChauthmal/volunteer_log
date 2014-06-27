@@ -19,6 +19,7 @@ describe User do
 	it { should respond_to(:janhours) }
 	it { should respond_to(:febhours) }
 	it { should respond_to(:marhours) }
+	it { should respond_to(:hours) }
 
 	it { should be_valid }
 

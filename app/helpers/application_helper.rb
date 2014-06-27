@@ -21,4 +21,20 @@ module ApplicationHelper
 			return edit_marhour_path(hour)
 		end
 	end
+
+	def copy_to_correct_month(hour)
+		if hour.date.strftime("%m") == "01"
+			current_user.janhours.create(date: hour.date, numhours: hour.numhours)
+			redirect_to janhours_path
+		end
+		if hour.date.strftime("%m") == "02"
+			current_user.febhours.create(date: hour.date, numhours: hour.numhours)
+			redirect_to febhours_path
+		end
+		if hour.date.strftime("%m") == "03"
+			current_user.marhours.create(date: hour.date, numhours: hour.numhours)
+			redirect_to marhours_path
+		end
+		hour.destroy
+	end
 end

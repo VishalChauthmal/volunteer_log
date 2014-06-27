@@ -1,5 +1,6 @@
 VolunteerApp::Application.routes.draw do
 
+  resources :hours, only: [:new, :create, :destroy]
   resources :marhours
   resources :febhours
   resources :janhours

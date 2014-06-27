@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
 	has_many :janhours
 	has_many :febhours
 	has_many :marhours
+	has_many :hours
 
 	validates :name, presence: true, length: { maximum: 50 }
 	VALID_EMAIL_REGEX = /\A[\w\-.]+@(atma)[a-zA-Z\.]+\Z/i
