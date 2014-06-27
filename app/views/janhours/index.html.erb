@@ -1,6 +1,6 @@
 <% provide(:title, 'All Logs') %>
 
-<h1>All Logs</h1>
+<h2 class="center">All Logs</h2>
 
 <%= render 'janhours_calendar' %>
 
@@ -8,13 +8,6 @@
 
 
 
-<hr>
-<ul>
-	<% @monhours.each do |monhour| %>
-		<li>
-			<p>Volunteer Name: <%= monhour.user.name %></p>
-			<p>Date: <%= monhour.date %></p>
-			<p>Number of Hours: <%= monhour.numhours %></p>
-		</li>
-	<% end %>
-</ul>
+<%#= render 'shared/month_index' %>
+
+<%= render 'shared/month_bar' %>

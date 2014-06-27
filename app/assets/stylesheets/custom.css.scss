@@ -230,7 +230,7 @@ input {
 #calendar td {
   background: #FFF;
   color: #777;
-  height: 80px;
+  height: 45px;
   vertical-align: top;
   font-size: 16px;
 }
@@ -241,8 +241,8 @@ input {
 
 #calendar #month {
   margin: 0;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 0px;
+  padding-bottom: 20px;
   text-align: center;
 }
 
@@ -268,4 +268,20 @@ input {
   padding: 0;
   font-size: 11px;
   text-align: center;
+}
+
+
+/* Links for each date in calendar */
+
+.entered_hr {
+	a {
+		color: green;
+	}
+}
+
+.unentered_hr {
+	list-style: none;
+	a {
+		color: red;
+	}
 }

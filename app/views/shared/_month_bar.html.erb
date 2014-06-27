@@ -1,0 +1,22 @@
+<div class="navbar navbar-fixed-bottom navbar-inverse">
+	<div class="navbar-inner">
+		<div class="container">
+			<% if signed_in? %>
+				<ul class="nav" style="margin: auto">
+					<li><%= link_to "January", janhours_path %></li>
+					<li><%= link_to "February", febhours_path %></li>
+					<li><%= link_to "March", marhours_path %></li>
+					<li><%= link_to "April", '#' %></li>
+					<li><%= link_to "May", '#' %></li>
+					<li><%= link_to "June", '#' %></li>
+					<li><%= link_to "July", '#' %></li>
+					<li><%= link_to "August", '#' %></li>
+					<li><%= link_to "September", '#' %></li>
+					<li><%= link_to "October", '#' %></li>
+					<li><%= link_to "November", '#' %></li>
+					<li><%= link_to "December", '#' %></li>
+				</ul>
+			<% end %>
+		</div>
+	</div>
+</div>

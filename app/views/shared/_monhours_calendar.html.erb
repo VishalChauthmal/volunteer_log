@@ -1,22 +1,24 @@
 <div id="calendar">
-	<h2 id="month">
+	<h3 id="month">
 		<%= link_to "<", :year => (@date-1.year).strftime("%Y-%m-01") %>
-		<%= h @date.strftime("%B %Y") %>
+		<%= @date.strftime("%B %Y") %>
 		<%= link_to ">", :year => (@date+1.year).strftime("%Y-%m-01") %>
-	</h2>
+	</h3>
 	
 	<%= calendar_for @monhours, :year => @date.year, :month => @date.month do |calendar| %>
 	<%= calendar.head('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday') %>
 		<% calendar.day(:day_method => :date) do |date, monhours| %>
 			<%= date.day %>
 			<% if monhours.length == 0 %>
-				<ul style="list-style: none"><li><%= link_to "Add", @newpath %><li></ul>
+				<ul class="unentered_hr">
+					<li><%= link_to "Add", @newpath %><li>
+				</ul>
 			<% else %>
 				<ul>
 					<% for @monhour in monhours %>
-							<li><%= @monhour.user.name %></li>
-							<li><%= @monhour.numhours %></li>
-							<li><%= link_to "Edit", editpath(@monhour) %></li>
+							<li class="entered_hr">
+								<%= link_to @monhour.numhours, editpath(@monhour) %>
+							</li>
 					<% end %>
 				</ul>
 			<% end %>

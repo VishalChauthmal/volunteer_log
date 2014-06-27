@@ -1,0 +1,10 @@
+<hr>
+<ul>
+	<% @monhours.each do |monhour| %>
+		<li>
+			<p>Volunteer Name: <%= monhour.user.name %></p>
+			<p>Date: <%= monhour.date %></p>
+			<p>Number of Hours: <%= monhour.numhours %></p>
+		</li>
+	<% end %>
+</ul>
