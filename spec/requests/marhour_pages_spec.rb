@@ -34,13 +34,13 @@ describe "Marhour Pages" do
 
 			describe "with valid marhour information" do
 				before do
-					fill_in "Date", with: "2015-03-05" # ??
+					fill_in "Date", with: "2015-03-05"
 					fill_in "Number of Hours", with: "5.33"
+					click_button "Submit"
 				end
 
-				#Not able to check possibly due to the Date field above
-				#it { should have_selector('div.alert.alert-success') }
-				#it { should have_content('Volunteer Name') }
+				it { should have_selector('div.alert.alert-success') }
+				it { should have_content('All Logs') }
 			end
 		end
 	end
@@ -64,7 +64,7 @@ describe "Marhour Pages" do
 			end
 
 			it { should have_selector('div.alert.alert-success') }
-			it { should have_content('Volunteer Name') }
+			it { should have_content('March') }
 		end
 	end
 
@@ -78,8 +78,28 @@ describe "Marhour Pages" do
 
 		it { should have_title('Logs') }
 		it { should have_content('All Logs') }
-		it { should have_content(@marhour.numhours) }
+		it { should have_link('January', href: janhours_path) }
+		it { should have_link(@marhour.numhours) }
 		it { should have_link('Add') }
 		specify { expect(user.marhours.find_by(date: "#{Date.today.strftime("%Y")}-03-07")).to be_nil }
+
+		describe "after clicking 'Add' link" do
+			before { click_link('Add', match: :first) }
+		
+			it { should have_title('New Log Entry') }
+			it { should have_content('Fill In Your Log') }
+		end
+
+		describe "after clicking on any hour link" do
+			before do
+				click_link(@marhour.numhours)
+				fill_in "Date", with: "2015-03-05"
+				fill_in "Number of Hours", with: "5.33"
+				click_button "Submit"
+			end
+
+			it { should have_selector('div.alert.alert-success') }
+			it { should have_content('All Logs') }
+		end			
 	end
 end

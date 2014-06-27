@@ -104,4 +104,22 @@ describe "User pages" do
 		it { should have_selector('ul.users') }
 		it { should have_selector('li', text: user.name) }
 	end
+
+	describe "User Logs page" do
+		let(:user) { FactoryGirl.create(:user) }
+		before do
+			sign_in user
+			visit logs_path
+		end
+
+		it { should have_title('All Logs') }
+		it { should have_content('All Logs') }
+		it { should have_link('Add') }
+
+		describe "after clicking the 'Add' link" do
+			before { click_link('Add', match: :first) }
+			it { should have_content('Fill In Your Log') }
+			it { should have_title('New Log Entry') }
+		end
+	end
 end
