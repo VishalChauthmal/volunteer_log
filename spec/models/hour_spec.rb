@@ -34,7 +34,8 @@ describe Hour do
 			@hour_2 = @hour.dup
 			@hour_2.save
 		end
-		it { should_not be_valid }
+		#Commented as it's taken care of in controller and not in model: it { should_not be_valid }
+		#Or maybe not even needed for Hour
 	end
 
 	# Perhaps not needed as it's deleted right after saving. Checking in months' tables

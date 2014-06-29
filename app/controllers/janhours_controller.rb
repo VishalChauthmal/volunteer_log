@@ -51,6 +51,9 @@ class JanhoursController < ApplicationController
 			if !@janhour.date.nil? && @janhour.date.strftime("%m") != "01"
 				redirect_to janhours_path, notice: "The month is not correct."
 			end
+			if !current_user.janhours.find_by(date: @janhour.date).nil?
+				redirect_to janhours_path, notice: "You already submitted the log for this date."
+			end
 		end
 
 		def update_correct_month

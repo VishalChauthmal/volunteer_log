@@ -41,6 +41,17 @@ describe "Febhour Pages" do
 
 				it { should have_selector('div.alert.alert-success') }
 				it { should have_content('All Logs') }
+
+				describe "if submitted twice for the same date" do
+					before do
+						visit new_febhour_path
+						fill_in "Date", with: "2015-02-05"
+						fill_in "Number of Hours", with: "6.33"
+						click_button "Submit"
+					end
+
+					it { should have_content('already submitted') }
+				end
 			end
 		end
 	end

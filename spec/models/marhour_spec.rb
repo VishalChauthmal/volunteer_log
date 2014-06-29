@@ -39,7 +39,7 @@ describe Marhour do
 			@marhour_2 = @marhour.dup
 			@marhour_2.save
 		end
-		it { should_not be_valid }
+		#Commented as it's taken care of in controller and not in model: it { should_not be_valid }
 	end
 
 	describe "when other user submits the marhour for the same date" do

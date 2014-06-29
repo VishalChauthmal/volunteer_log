@@ -51,6 +51,9 @@ class FebhoursController < ApplicationController
 			if !@febhour.date.nil? && @febhour.date.strftime("%m") != "02"
 				redirect_to febhours_path, notice: "The month is not correct."
 			end
+			if !current_user.febhours.find_by(date: @febhour.date).nil?
+				redirect_to febhours_path, notice: "You already submitted the log for this date."
+			end
 		end
 
 		def update_correct_month

@@ -41,6 +41,18 @@ describe "Hour Pages" do
 
 				it { should have_selector('div.alert.alert-success') }
 				it { should have_content('All Logs') }
+
+				describe "if submitted twice for the same date" do
+					before do
+						visit new_hour_path
+						fill_in "Date", with: "2015-02-05"
+						fill_in "Number of Hours", with: "5.33"
+						click_button "Submit"
+					end
+
+					it { should have_content('already submitted') }
+					it { should have_content('All Logs') }
+				end
 			end
 		end
 	end

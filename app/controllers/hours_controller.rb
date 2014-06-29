@@ -9,7 +9,6 @@ class HoursController < ApplicationController
 	def create
 		@hour = current_user.hours.build(hour_params)
 		if @hour.save
-			flash[:success] = "Volunteer Log updated successfully!"
 			copy_to_correct_month(@hour)
 		else
 			render 'new'

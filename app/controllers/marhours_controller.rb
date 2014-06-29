@@ -51,6 +51,9 @@ class MarhoursController < ApplicationController
 			if !@marhour.date.nil? && @marhour.date.strftime("%m") != "03"
 				redirect_to marhours_path, notice: "The month is not correct."
 			end
+			if !current_user.marhours.find_by(date: @marhour.date).nil?
+				redirect_to marhours_path, notice: "You already submitted the log for this date."
+			end
 		end
 
 		def update_correct_month
