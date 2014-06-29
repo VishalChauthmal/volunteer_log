@@ -295,3 +295,33 @@ input {
 	border: 1px solid black;
 	margin: auto;
 }
+
+/* Profile Photo */
+
+.profile-pic {
+	border: 1px solid gray;
+	width: 95px;
+	height: 100px;
+}
+
+
+/* Forms */
+
+.btn {
+	margin-top: 10px;
+}
+
+
+.hour-form {
+	background-color: #F5F5F5;
+	border: 1px solid #D3D3D3;
+	margin: 30px 80px;
+	padding: 50px 75px 40px 55px;
+}
+
+.org-form {
+	background-color: #F5F5F5;
+	border: 1px solid #D3D3D3;
+	margin: 30px 30px;
+	padding: 50px 75px 40px 55px;
+}

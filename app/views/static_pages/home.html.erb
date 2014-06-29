@@ -5,7 +5,6 @@
 	</div>
 <% else %>
 	<h2 class="center">Fill In Your Log Below</h2>
-	<%= render 'shared/newhour_form' %>
+	<%= render 'shared/new_hour_form', object: @hour %>
+	<div><%= render 'shared/month_bar' %></div>
 <% end %>
-
-<div><%= render 'shared/month_bar' %></div>

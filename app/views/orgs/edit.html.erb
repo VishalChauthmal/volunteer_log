@@ -4,14 +4,16 @@
 
 <div class="row">
 	<div class="span6 offset3">
-		<%= form_for(@org) do |f| %>
+		<div class="org-form">
+			<%= form_for(@org) do |f| %>
 
-			<%= render 'shared/error_messages', object: f.object %>
-			
-			<%= f.label :org_name, "Organization Name" %>
-			<%= f.text_field :org_name %>
+				<%= render 'shared/error_messages', object: f.object %>
+				
+				<%= f.label :org_name, "Organization Name" %>
+				<%= f.text_field :org_name %>
 
-			<%= f.submit "Save Changes", class: "btn btn-large btn-primary" %>
-		<% end %>
+				<%= f.submit "Save Changes", class: "btn btn-large btn-primary btn-block" %>
+			<% end %>
+		</div>
 	</div>
 </div>
