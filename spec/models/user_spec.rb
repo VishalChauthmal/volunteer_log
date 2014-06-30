@@ -20,6 +20,15 @@ describe User do
 	it { should respond_to(:febhours) }
 	it { should respond_to(:marhours) }
 	it { should respond_to(:hours) }
+	it { should respond_to(:aprhours) }
+	it { should respond_to(:mayhours) }
+	it { should respond_to(:junhours) }
+	it { should respond_to(:julhours) }
+	it { should respond_to(:aughours) }
+	it { should respond_to(:sephours) }
+	it { should respond_to(:octhours) }
+	it { should respond_to(:novhours) }
+	it { should respond_to(:dechours) }
 
 	it { should be_valid }
 

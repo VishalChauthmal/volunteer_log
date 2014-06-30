@@ -11,7 +11,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140627121828) do
+ActiveRecord::Schema.define(version: 20140630104122) do
+
+  create_table "aprhours", force: true do |t|
+    t.integer  "user_id"
+    t.date     "date"
+    t.float    "numhours"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "aughours", force: true do |t|
+    t.integer  "user_id"
+    t.date     "date"
+    t.float    "numhours"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "dechours", force: true do |t|
+    t.integer  "user_id"
+    t.date     "date"
+    t.float    "numhours"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "febhours", force: true do |t|
     t.integer  "user_id"
@@ -37,7 +61,47 @@ ActiveRecord::Schema.define(version: 20140627121828) do
     t.datetime "updated_at"
   end
 
+  create_table "julhours", force: true do |t|
+    t.integer  "user_id"
+    t.date     "date"
+    t.float    "numhours"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "junhours", force: true do |t|
+    t.integer  "user_id"
+    t.date     "date"
+    t.float    "numhours"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "marhours", force: true do |t|
+    t.integer  "user_id"
+    t.date     "date"
+    t.float    "numhours"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "mayhours", force: true do |t|
+    t.integer  "user_id"
+    t.date     "date"
+    t.float    "numhours"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "novhours", force: true do |t|
+    t.integer  "user_id"
+    t.date     "date"
+    t.float    "numhours"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "octhours", force: true do |t|
     t.integer  "user_id"
     t.date     "date"
     t.float    "numhours"
@@ -47,6 +111,14 @@ ActiveRecord::Schema.define(version: 20140627121828) do
 
   create_table "orgs", force: true do |t|
     t.string   "org_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "sephours", force: true do |t|
+    t.integer  "user_id"
+    t.date     "date"
+    t.float    "numhours"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,0 +1,2 @@
+module MayhoursHelper
+end

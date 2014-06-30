@@ -1,5 +1,14 @@
 VolunteerApp::Application.routes.draw do
 
+  resources :dechours
+  resources :novhours
+  resources :octhours
+  resources :sephours
+  resources :aughours
+  resources :julhours
+  resources :junhours
+  resources :mayhours
+  resources :aprhours
   resources :hours, only: [:new, :create, :destroy]
   resources :marhours
   resources :febhours
