@@ -1,0 +1,31 @@
+<div class="row">
+	<div class="span6 offset3">
+		<div class="user-form">
+			<%= form_for(object) do |f| %>
+
+				<%= render 'shared/error_messages', object: f.object %>
+				
+				<%= f.label :name %>
+				<%= f.text_field :name %>
+
+				<%= f.label :email %>
+				<%= f.text_field :email %>
+
+				<%#= f.label :org_id, "Organization ID" %>
+				<%#= f.text_field :org_id %>
+
+				<%= f.label :org_id, "Organization" %>
+				<%#= f.select :org_id, options_for_select(Org.all.map{ |c| [c.org_name, c.id] }) %>
+				<%= f.collection_select :org_id, Org.all, :id, :org_name, :prompt => "Please Select  Organization" %>
+
+				<%= f.label :password %>
+				<%= f.password_field :password %>
+
+				<%= f.label :password_confirmation, "Confirm Password" %>
+				<%= f.password_field :password_confirmation %>
+
+				<%= f.submit "Create Account", class: "btn btn-large btn-primary btn-block" %>
+			<% end %>
+		</div>
+	</div>
+</div>

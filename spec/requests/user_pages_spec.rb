@@ -60,7 +60,7 @@ describe "User pages" do
 		end
 
 		describe "Page" do
-			it { should have_content('Update Your Profile') }
+			it { should have_content('Edit Your Profile') }
 			it { should have_title('Edit Profile') }
 		end
 

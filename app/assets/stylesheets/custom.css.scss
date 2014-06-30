@@ -162,7 +162,7 @@ input {
 	width: 100%;
 }
 
-/*
+
 input, textarea, select, .uneditable-input {
 	border: 1px solid #bbb;
 	width: 100%;
@@ -173,7 +173,6 @@ input, textarea, select, .uneditable-input {
 input {
 	height: auto !important;
 }
-*/
 
 #error_explanation {
 	color: #f00;
@@ -316,7 +315,7 @@ input {
 	background-color: #F5F5F5;
 	border: 1px solid #D3D3D3;
 	margin: 30px 80px;
-	padding: 50px 75px 40px 55px;
+	padding: 50px 65px 40px 65px;
 }
 
 .org-form {
@@ -324,4 +323,21 @@ input {
 	border: 1px solid #D3D3D3;
 	margin: 30px 30px;
 	padding: 50px 75px 40px 55px;
+}
+
+.user-form {
+	background-color: #F5F5F5;
+	border: 1px solid #D3D3D3;
+	margin: 10px 40px 0px 40px;
+	padding: 30px 60px 15px 60px;
+}
+
+.session-form {
+	background-color: #F5F5F5;
+	border: 1px solid #D3D3D3;
+	margin: 40px;
+	padding: 60px 60px 45px 60px;
+	p {
+		text-align: center;
+	}
 }
