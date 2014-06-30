@@ -29,8 +29,11 @@ describe User do
 	it { should respond_to(:octhours) }
 	it { should respond_to(:novhours) }
 	it { should respond_to(:dechours) }
+	it { should respond_to(:admin) }
 
 	it { should be_valid }
+	it { should_not be_admin }
+
 
 	describe "when name is not present" do
 		before { @user.name = " " }
@@ -115,5 +118,14 @@ describe User do
 	describe "remember token" do
 		before { @user.save }
 		its(:remember_token) { should_not be_blank }
+	end
+
+	describe "with admin user" do
+		before do
+			@user.save!
+			@user.update_attributes(admin:true)
+		end
+
+		it { should be_admin }
 	end
 end

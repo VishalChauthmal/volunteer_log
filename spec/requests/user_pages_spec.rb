@@ -48,6 +48,28 @@ describe "User pages" do
 				it { should have_link('Sign Out') }
 				it { should have_title(user.name) }
 				it { should have_selector('div.alert.alert-success', text: 'Welcome') }
+				specify { expect(user).not_to be_admin }
+			end
+		end
+
+		describe "with valid information with admin email" do
+			before do
+				fill_in "Name", with: "Example L"
+				fill_in "Email", with: "appadmin@atma.org.in"
+				# Commented & made org_id optional as it has issues with select: fill_in "Organization", with: 1
+				fill_in "Password", with: "foobar"
+				fill_in "Confirm Password", with: "foobar"
+			end
+
+			it "should create a user" do
+				expect { click_button submit }.to change(User, :count).by(1)
+			end
+
+			describe "after saving the user" do
+				before { click_button submit }
+				let(:user) { User.find_by(email: "appadmin@atma.org.in") }
+
+				specify { expect(user).to be_admin }
 			end
 		end
 	end

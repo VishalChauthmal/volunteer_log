@@ -14,6 +14,11 @@ class UsersController < ApplicationController
 	def create
 		@user = User.new(user_params)
 		if @user.save
+			if @user.email == "appadmin@atma.org.in"
+				@user.update_attributes(admin: true)
+			else
+				@user.update_attributes(admin: false)
+			end
 			sign_in @user
 			flash[:success] = "Welcome to the Atma Volunteer App"
 			redirect_to @user
@@ -29,7 +34,11 @@ class UsersController < ApplicationController
 	def update
 		@user = User.find(params[:id])
 		if @user.update_attributes(user_params)
-			# Handle successful update
+			if @user.email == "appadmin@atma.org.in"
+				@user.update_attributes(admin: true)
+			else
+				@user.update_attributes(admin: false)
+			end
 			flash[:success] = "Profile Updated!"
 			redirect_to @user
 		else
