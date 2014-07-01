@@ -125,6 +125,27 @@ describe "User pages" do
 		it { should have_content("All Users") }
 		it { should have_selector('ul.users') }
 		it { should have_selector('li', text: user.name) }
+
+		describe "Delete User links" do
+			it { should_not have_link('Delete') }
+
+			describe "as admin user" do
+				let(:adminuser) { FactoryGirl.create(:user, email: "adminuser@atmaexample.org") }
+				before do
+					adminuser.update_attributes(admin: true)
+					sign_in adminuser
+					visit users_path
+				end
+
+				it { should have_link('Delete') }
+				it "should delete the user" do
+					expect do
+						click_link('Delete', match: :first)
+					end.to change(User, :count).by(-1)
+				end
+				it { should_not have_link('Delete', href: user_path(adminuser)) }
+			end
+		end
 	end
 
 	describe "User Logs page" do
