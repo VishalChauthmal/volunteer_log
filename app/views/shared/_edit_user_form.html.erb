@@ -18,6 +18,9 @@
 				<%#= f.select :org_id, options_for_select(Org.all.map{ |c| [c.org_name, c.id] }) %>
 				<%= f.collection_select :org_id, Org.all, :id, :org_name, :prompt => "Please Select  Organization" %>
 
+				<%= f.label :start_date, "Start Date" %>
+				<%= f.date_field :start_date %>
+
 				<%= f.label :password %>
 				<%= f.password_field :password %>
 

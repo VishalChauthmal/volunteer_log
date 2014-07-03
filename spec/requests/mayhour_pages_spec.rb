@@ -34,7 +34,7 @@ describe "Mayhour Pages" do
 
 			describe "with valid mayhour information" do
 				before do
-					fill_in "Date", with: "2015-05-05"
+					fill_in "Date", with: "2013-05-05"
 					fill_in "Number of Hours", with: "5.33"
 					click_button "Submit"
 				end
@@ -45,13 +45,33 @@ describe "Mayhour Pages" do
 				describe "if submitted twice for the same date" do
 					before do
 						visit new_mayhour_path
-						fill_in "Date", with: "2015-05-05"
+						fill_in "Date", with: "2013-05-05"
 						fill_in "Number of Hours", with: "6.33"
 						click_button "Submit"
 					end
 
 					it { should have_content('already submitted') }
 				end
+			end
+
+			describe "with date prior to start_date" do
+				before do
+					fill_in "Date", with: "2012-05-10"
+					fill_in "Number of Hours", with: "5.33"
+					click_button "Submit"
+				end
+
+				it { should have_content('prior to your joining.') }
+			end
+
+			describe "with a date that's in the future" do
+				before do
+					fill_in "Date", with: Date.parse((Date.today + 1.year).strftime("%Y-05-%d"))
+					fill_in "Number of Hours", with: "6.5"
+					click_button "Submit"
+				end
+
+				it { should have_content('for future dates') }
 			end
 		end
 	end
@@ -60,7 +80,7 @@ describe "Mayhour Pages" do
 
 		before do
 			sign_in user
-			@mayhour = user.mayhours.create(date: "2015-05-01", numhours: 4.67)
+			@mayhour = user.mayhours.create(date: "2013-05-01", numhours: 4.67)
 			visit edit_mayhour_path(@mayhour)
 		end
 
@@ -76,6 +96,26 @@ describe "Mayhour Pages" do
 
 			it { should have_selector('div.alert.alert-success') }
 			it { should have_content('May') }
+		end
+
+		describe "with date prior to start_date" do
+			before do
+				fill_in "Date", with: "2012-05-10"
+				fill_in "Number of Hours", with: "5.33"
+				click_button "Submit"
+			end
+
+			it { should have_content('prior to your joining.') }
+		end
+
+		describe "with a date that's in the future" do
+			before do
+				fill_in "Date", with: Date.parse((Date.today + 1.year).strftime("%Y-05-%d"))
+				fill_in "Number of Hours", with: "6.5"
+				click_button "Submit"
+			end
+
+			it { should have_content('for future dates') }
 		end
 	end
 
@@ -104,7 +144,7 @@ describe "Mayhour Pages" do
 		describe "after clicking on any hour link" do
 			before do
 				click_link(@mayhour.numhours)
-				fill_in "Date", with: "2015-05-05"
+				fill_in "Date", with: "2013-05-05"
 				fill_in "Number of Hours", with: "5.33"
 				click_button "Submit"
 			end

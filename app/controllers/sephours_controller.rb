@@ -1,8 +1,8 @@
 class SephoursController < ApplicationController
 
 	before_action :signed_in_user
-	before_action :create_correct_month, only: [:create]
-	before_action :update_correct_month, only: [:update]
+	before_action :create_correct, only: [:create]
+	before_action :update_correct, only: [:update]
 
 	def new
 		@sephour = current_user.sephours.build
@@ -46,7 +46,7 @@ class SephoursController < ApplicationController
 			params.require(:sephour).permit(:date, :numhours)		
 		end
 
-		def create_correct_month
+		def create_correct
 			@sephour = 	current_user.sephours.build(sephour_params)
 			if !@sephour.date.nil? && @sephour.date.strftime("%m") != "09"
 				redirect_to sephours_path, notice: "The month is not correct."
@@ -54,11 +54,19 @@ class SephoursController < ApplicationController
 			if !current_user.sephours.find_by(date: @sephour.date).nil?
 				redirect_to sephours_path, notice: "You already submitted the log for this date."
 			end
+			if !@sephour.date.nil? && ((@sephour.date < current_user.start_date) || (@sephour.date > Date.today + 1.day))
+				redirect_to sephours_path, notice: "You cannot submit the logs for future dates
+													or dates prior to your joining."
+			end
 		end
 
-		def update_correct_month
+		def update_correct
 			if !params[:sephour][:date].nil? && (Date.parse(params[:sephour][:date])).strftime("%m") != "09"
 				redirect_to sephours_path, notice: "The month is not correct."
+			end
+			if !params[:sephour][:date].nil? && ((Date.parse(params[:sephour][:date]) < current_user.start_date) || (Date.parse(params[:sephour][:date]) > Date.today + 1.day))
+				redirect_to sephours_path, notice: "You cannot submit the logs for future dates
+													or dates prior to your joining."
 			end
 		end
 end

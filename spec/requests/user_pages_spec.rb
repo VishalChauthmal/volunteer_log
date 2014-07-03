@@ -33,6 +33,7 @@ describe "User pages" do
 				fill_in "Name", with: "Example L"
 				fill_in "Email", with: "vol@atmaexample.com"
 				# Commented & made org_id optional as it has issues with select: fill_in "Organization", with: 1
+				fill_in "Start Date", with: "2014-01-22"
 				fill_in "Password", with: "foobar"
 				fill_in "Confirm Password", with: "foobar"
 			end
@@ -57,6 +58,7 @@ describe "User pages" do
 				fill_in "Name", with: "Example L"
 				fill_in "Email", with: "appadmin@atma.org.in"
 				# Commented & made org_id optional as it has issues with select: fill_in "Organization", with: 1
+				fill_in "Start Date", with: "2014-01-22"
 				fill_in "Password", with: "foobar"
 				fill_in "Confirm Password", with: "foobar"
 			end
@@ -101,6 +103,7 @@ describe "User pages" do
 				fill_in "Name", with: new_name
 				fill_in "Email", with: new_email
 				#Commented & made org_id optional as it has issues with select: fill_in "Organization ID", with: new_org_id
+				fill_in "Start Date", with: "2014-01-22"
 				fill_in "Password", with: user.password
 				fill_in "Confirm Password", with: user.password
 				click_button "Save Changes"

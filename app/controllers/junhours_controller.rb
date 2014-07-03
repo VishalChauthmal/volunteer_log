@@ -1,8 +1,8 @@
 class JunhoursController < ApplicationController
 
 	before_action :signed_in_user
-	before_action :create_correct_month, only: [:create]
-	before_action :update_correct_month, only: [:update]
+	before_action :create_correct, only: [:create]
+	before_action :update_correct, only: [:update]
 
 	def new
 		@junhour = current_user.junhours.build
@@ -46,19 +46,27 @@ class JunhoursController < ApplicationController
 			params.require(:junhour).permit(:date, :numhours)		
 		end
 
-		def create_correct_month
+		def create_correct
 			@junhour = 	current_user.junhours.build(junhour_params)
 			if !@junhour.date.nil? && @junhour.date.strftime("%m") != "06"
 				redirect_to junhours_path, notice: "The month is not correct."
 			end
 			if !current_user.junhours.find_by(date: @junhour.date).nil?
 				redirect_to junhours_path, notice: "You already submitted the log for this date."
+			end	
+			if !@junhour.date.nil? && ((@junhour.date < current_user.start_date) || (@junhour.date > Date.today + 1.day))
+				redirect_to junhours_path, notice: "You cannot submit the logs for future dates
+													or dates prior to your joining."
 			end
 		end
 
-		def update_correct_month
+		def update_correct
 			if !params[:junhour][:date].nil? && (Date.parse(params[:junhour][:date])).strftime("%m") != "06"
 				redirect_to junhours_path, notice: "The month is not correct."
+			end
+			if !params[:junhour][:date].nil? && ((Date.parse(params[:junhour][:date]) < current_user.start_date) || (Date.parse(params[:junhour][:date]) > Date.today + 1.day))
+				redirect_to junhours_path, notice: "You cannot submit the logs for future dates
+													or dates prior to your joining."
 			end
 		end
 end

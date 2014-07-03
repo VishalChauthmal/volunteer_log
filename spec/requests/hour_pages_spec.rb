@@ -34,7 +34,7 @@ describe "Hour Pages" do
 
 			describe "with valid hour information" do
 				before do
-					fill_in "Date", with: "2015-02-05"
+					fill_in "Date", with: "2013-02-05"
 					fill_in "Number of Hours", with: "5.33"
 					click_button "Submit"
 				end
@@ -45,7 +45,7 @@ describe "Hour Pages" do
 				describe "if submitted twice for the same date" do
 					before do
 						visit new_hour_path
-						fill_in "Date", with: "2015-02-05"
+						fill_in "Date", with: "2013-02-05"
 						fill_in "Number of Hours", with: "5.33"
 						click_button "Submit"
 					end
@@ -53,6 +53,26 @@ describe "Hour Pages" do
 					it { should have_content('already submitted') }
 					it { should have_content('All Logs') }
 				end
+			end
+
+			describe "with date prior to start_date" do
+				before do
+					fill_in "Date", with: "2012-05-10"
+					fill_in "Number of Hours", with: "5.33"
+					click_button "Submit"
+				end
+
+				it { should have_content('prior to your joining.') }
+			end
+
+			describe "with a date that's in the future" do
+				before do
+					fill_in "Date", with: Date.today + 3.days
+					fill_in "Number of Hours", with: "6.5"
+					click_button "Submit"
+				end
+
+				it { should have_content('for future dates') }
 			end
 		end
 	end

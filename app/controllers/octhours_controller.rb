@@ -1,8 +1,8 @@
 class OcthoursController < ApplicationController
 
 	before_action :signed_in_user
-	before_action :create_correct_month, only: [:create]
-	before_action :update_correct_month, only: [:update]
+	before_action :create_correct, only: [:create]
+	before_action :update_correct, only: [:update]
 
 	def new
 		@octhour = current_user.octhours.build
@@ -46,7 +46,7 @@ class OcthoursController < ApplicationController
 			params.require(:octhour).permit(:date, :numhours)		
 		end
 
-		def create_correct_month
+		def create_correct
 			@octhour = 	current_user.octhours.build(octhour_params)
 			if !@octhour.date.nil? && @octhour.date.strftime("%m") != "10"
 				redirect_to octhours_path, notice: "The month is not correct."
@@ -54,11 +54,19 @@ class OcthoursController < ApplicationController
 			if !current_user.octhours.find_by(date: @octhour.date).nil?
 				redirect_to octhours_path, notice: "You already submitted the log for this date."
 			end
+			if !@octhour.date.nil? && ((@octhour.date < current_user.start_date) || (@octhour.date > Date.today))
+				redirect_to octhours_path, notice: "You cannot submit the logs for future dates
+													or dates prior to your joining."
+			end
 		end
 
-		def update_correct_month
+		def update_correct
 			if !params[:octhour][:date].nil? && (Date.parse(params[:octhour][:date])).strftime("%m") != "10"
 				redirect_to octhours_path, notice: "The month is not correct."
+			end
+			if !params[:octhour][:date].nil? && ((Date.parse(params[:octhour][:date]) < current_user.start_date) || (Date.parse(params[:octhour][:date]) > Date.today + 1.day))
+				redirect_to octhours_path, notice: "You cannot submit the logs for future dates
+													or dates prior to your joining."
 			end
 		end
 end

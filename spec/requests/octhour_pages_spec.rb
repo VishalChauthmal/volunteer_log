@@ -34,7 +34,7 @@ describe "Octhour Pages" do
 
 			describe "with valid octhour information" do
 				before do
-					fill_in "Date", with: "2015-10-05"
+					fill_in "Date", with: "2013-10-05"
 					fill_in "Number of Hours", with: "5.33"
 					click_button "Submit"
 				end
@@ -45,13 +45,33 @@ describe "Octhour Pages" do
 				describe "if submitted twice for the same date" do
 					before do
 						visit new_octhour_path
-						fill_in "Date", with: "2015-10-05"
+						fill_in "Date", with: "2013-10-05"
 						fill_in "Number of Hours", with: "6.33"
 						click_button "Submit"
 					end
 
 					it { should have_content('already submitted') }
 				end
+			end
+
+			describe "with date prior to start_date" do
+				before do
+					fill_in "Date", with: "2012-10-10"
+					fill_in "Number of Hours", with: "5.33"
+					click_button "Submit"
+				end
+
+				it { should have_content('prior to your joining.') }
+			end
+
+			describe "with a date that's in the future" do
+				before do
+					fill_in "Date", with: Date.parse((Date.today + 1.year).strftime("%Y-10-%d"))
+					fill_in "Number of Hours", with: "6.5"
+					click_button "Submit"
+				end
+
+				it { should have_content('for future dates') }
 			end
 		end
 	end
@@ -60,7 +80,7 @@ describe "Octhour Pages" do
 
 		before do
 			sign_in user
-			@octhour = user.octhours.create(date: "2015-10-01", numhours: 4.67)
+			@octhour = user.octhours.create(date: "2013-10-01", numhours: 4.67)
 			visit edit_octhour_path(@octhour)
 		end
 
@@ -76,6 +96,26 @@ describe "Octhour Pages" do
 
 			it { should have_selector('div.alert.alert-success') }
 			it { should have_content('October') }
+		end
+
+		describe "with date prior to start_date" do
+			before do
+				fill_in "Date", with: "2012-10-10"
+				fill_in "Number of Hours", with: "5.33"
+				click_button "Submit"
+			end
+
+			it { should have_content('prior to your joining.') }
+		end
+
+		describe "with a date that's in the future" do
+			before do
+				fill_in "Date", with: Date.parse((Date.today + 1.year).strftime("%Y-10-%d"))
+				fill_in "Number of Hours", with: "6.5"
+				click_button "Submit"
+			end
+
+			it { should have_content('for future dates') }
 		end
 	end
 
@@ -104,7 +144,7 @@ describe "Octhour Pages" do
 		describe "after clicking on any hour link" do
 			before do
 				click_link(@octhour.numhours)
-				fill_in "Date", with: "2015-10-05"
+				fill_in "Date", with: "2013-10-05"
 				fill_in "Number of Hours", with: "5.33"
 				click_button "Submit"
 			end

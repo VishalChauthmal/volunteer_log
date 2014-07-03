@@ -3,7 +3,8 @@ require 'spec_helper'
 describe User do
 	
 	before { @user = User.new(name: "Example user", email: "user@atma.example.com",
-								password: "foobar", password_confirmation: "foobar", org_id: 1) }
+								password: "foobar", password_confirmation: "foobar", org_id: 1,
+								start_date: "2014-02-10") }
 	
 	subject { @user }
 
@@ -30,6 +31,7 @@ describe User do
 	it { should respond_to(:novhours) }
 	it { should respond_to(:dechours) }
 	it { should respond_to(:admin) }
+	it { should respond_to(:start_date) }
 
 	it { should be_valid }
 	it { should_not be_admin }
@@ -42,6 +44,11 @@ describe User do
 
 	describe "when email is not present" do
 		before { @user.email = " " }
+		it { should_not be_valid }
+	end
+
+	describe "when start_date is not present" do
+		before { @user.start_date = " " }
 		it { should_not be_valid }
 	end
 

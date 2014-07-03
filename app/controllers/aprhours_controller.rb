@@ -1,8 +1,8 @@
 class AprhoursController < ApplicationController
 
 	before_action :signed_in_user
-	before_action :create_correct_month, only: [:create]
-	before_action :update_correct_month, only: [:update]
+	before_action :create_correct, only: [:create]
+	before_action :update_correct, only: [:update]
 
 	def new
 		@aprhour = current_user.aprhours.build
@@ -46,7 +46,7 @@ class AprhoursController < ApplicationController
 			params.require(:aprhour).permit(:date, :numhours)		
 		end
 
-		def create_correct_month
+		def create_correct
 			@aprhour = 	current_user.aprhours.build(aprhour_params)
 			if !@aprhour.date.nil? && @aprhour.date.strftime("%m") != "04"
 				redirect_to aprhours_path, notice: "The month is not correct."
@@ -54,11 +54,19 @@ class AprhoursController < ApplicationController
 			if !current_user.aprhours.find_by(date: @aprhour.date).nil?
 				redirect_to aprhours_path, notice: "You already submitted the log for this date."
 			end
+			if !@aprhour.date.nil? && ((@aprhour.date < current_user.start_date) || (@aprhour.date > Date.today + 1.day))
+				redirect_to aprhours_path, notice: "You cannot submit the logs for future dates
+													or dates prior to your joining."
+			end
 		end
 
-		def update_correct_month
+		def update_correct
 			if !params[:aprhour][:date].nil? && (Date.parse(params[:aprhour][:date])).strftime("%m") != "04"
 				redirect_to aprhours_path, notice: "The month is not correct."
+			end
+			if !params[:aprhour][:date].nil? && ((Date.parse(params[:aprhour][:date]) < current_user.start_date) || (Date.parse(params[:aprhour][:date]) > Date.today + 1.day))
+				redirect_to aprhours_path, notice: "You cannot submit the logs for future dates
+													or dates prior to your joining."
 			end
 		end
 end

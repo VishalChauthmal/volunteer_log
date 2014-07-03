@@ -1,8 +1,8 @@
 class AughoursController < ApplicationController
 
 	before_action :signed_in_user
-	before_action :create_correct_month, only: [:create]
-	before_action :update_correct_month, only: [:update]
+	before_action :create_correct, only: [:create]
+	before_action :update_correct, only: [:update]
 
 	def new
 		@aughour = current_user.aughours.build
@@ -46,7 +46,7 @@ class AughoursController < ApplicationController
 			params.require(:aughour).permit(:date, :numhours)		
 		end
 
-		def create_correct_month
+		def create_correct
 			@aughour = 	current_user.aughours.build(aughour_params)
 			if !@aughour.date.nil? && @aughour.date.strftime("%m") != "08"
 				redirect_to aughours_path, notice: "The month is not correct."
@@ -54,11 +54,19 @@ class AughoursController < ApplicationController
 			if !current_user.aughours.find_by(date: @aughour.date).nil?
 				redirect_to aughours_path, notice: "You already submitted the log for this date."
 			end
+			if !@aughour.date.nil? && ((@aughour.date < current_user.start_date) || (@aughour.date > Date.today + 1.day))
+				redirect_to aughours_path, notice: "You cannot submit the logs for future dates 
+													or dates prior to your joining."
+			end
 		end
 
-		def update_correct_month
+		def update_correct
 			if !params[:aughour][:date].nil? && (Date.parse(params[:aughour][:date])).strftime("%m") != "08"
 				redirect_to aughours_path, notice: "The month is not correct."
+			end
+			if !params[:aughour][:date].nil? && ((Date.parse(params[:aughour][:date]) < current_user.start_date) || (Date.parse(params[:aughour][:date]) > Date.today + 1.day))
+				redirect_to aughours_path, notice: "You cannot submit the logs for future dates
+													or dates prior to your joining."
 			end
 		end
 end
