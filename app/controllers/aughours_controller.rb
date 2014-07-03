@@ -38,7 +38,11 @@ class AughoursController < ApplicationController
 	def index
 		@newpath = new_aughour_path
 		@monhours = current_user.aughours
-		@date = params[:year] ? Date.parse(params[:year]) : Date.parse("#{Date.today.strftime("%Y")}-08-01")
+		if Date.parse("#{Date.today.strftime("%Y")}-08-01") >= current_user.start_date
+			@date = params[:year] ? Date.parse(params[:year]) : Date.parse("#{Date.today.strftime("%Y")}-08-01")
+		else
+			@date = params[:year] ? Date.parse(params[:year]) : Date.parse("#{(Date.today+1.year).strftime("%Y")}-08-01")			
+		end
 	end
 
 	private

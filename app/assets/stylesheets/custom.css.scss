@@ -235,6 +235,9 @@ input {
 }
 
 #calendar .notmonth {
+  li {
+  font-size: 0; /* To make hours of dates from previous and following month invisible */
+  }
   color: #CCC;
 }
 

@@ -1,84 +1,129 @@
 <% provide(:title, 'All Logs') %>
 <h1>All Logs</h1>
 
-<% @monhours = current_user.janhours %>
-<% @date = params[:year] ? Date.parse(params[:year]) : Date.parse("#{Date.today.strftime("%Y")}-01-01") %>
-<% @newpath = new_janhour_path %>
-<%= render 'janhours/janhours_calendar' %>
+<% var_date = Date.parse(current_user.start_date.strftime("%Y-%m-01")) %>
+<% no_of_months = 0 %>
 
-<hr>
+<% while (var_date <= Date.today) do %>
+	<% var_date += 1.month %>
+	<% no_of_months += 1 %>
+<% end %>
 
-<% @monhours = current_user.febhours %>
-<% @date = params[:year] ? Date.parse(params[:year]) : Date.parse("#{Date.today.strftime("%Y")}-02-01") %>
-<% @newpath = new_febhour_path %>
-<%= render 'febhours/febhours_calendar' %>
 
-<hr>
+<% var_year = current_user.start_date.strftime("%Y").to_i %>
+<% var_no_of_months = 0 %>
 
-<% @monhours = current_user.marhours %>
-<% @date = params[:year] ? Date.parse(params[:year]) : Date.parse("#{Date.today.strftime("%Y")}-03-01") %>
-<% @newpath = new_marhour_path %>
-<%= render 'marhours/marhours_calendar' %>
 
-<hr>
+<% while (var_year <= Date.today.strftime("%Y").to_i) do %>
 
-<% @monhours = current_user.aprhours %>
-<% @date = params[:year] ? Date.parse(params[:year]) : Date.parse("#{Date.today.strftime("%Y")}-04-01") %>
-<% @newpath = new_aprhour_path %>
-<%= render 'aprhours/aprhours_calendar' %>
+	<% if (var_no_of_months < no_of_months && Date.parse("#{var_year}-01-01") >= Date.parse(current_user.start_date.strftime("%Y-%m-01")) ) %>
+		<% @monhours = current_user.janhours %>
+		<% @date = Date.parse("#{var_year}-01-01") %>
+		<% @newpath = new_janhour_path %>
+		<%= render 'janhours/janhours_calendar' %>
+		<% var_no_of_months += 1 %>
+		<% if var_no_of_months != no_of_months %><hr> <% end %>
+	<% end %>
 
-<hr>
+	<% if (var_no_of_months < no_of_months && Date.parse("#{var_year}-02-01") >= Date.parse(current_user.start_date.strftime("%Y-%m-01")) ) %>
+		<% @monhours = current_user.febhours %>
+		<% @date = Date.parse("#{var_year}-02-01") %>
+		<% @newpath = new_febhour_path %>
+		<%= render 'febhours/febhours_calendar' %>
+		<% var_no_of_months += 1 %>
+		<% if var_no_of_months != no_of_months %><hr> <% end %>
+	<% end %>
 
-<% @monhours = current_user.mayhours %>
-<% @date = params[:year] ? Date.parse(params[:year]) : Date.parse("#{Date.today.strftime("%Y")}-05-01") %>
-<% @newpath = new_mayhour_path %>
-<%= render 'mayhours/mayhours_calendar' %>
+	<% if (var_no_of_months < no_of_months && Date.parse("#{var_year}-03-01") >= Date.parse(current_user.start_date.strftime("%Y-%m-01")) ) %>
+		<% @monhours = current_user.marhours %>
+		<% @date = Date.parse("#{var_year}-03-01") %>
+		<% @newpath = new_marhour_path %>
+		<%= render 'marhours/marhours_calendar' %>
+		<% var_no_of_months += 1 %>
+		<% if var_no_of_months != no_of_months %><hr> <% end %>
+	<% end %>
 
-<hr>
+	<% if (var_no_of_months < no_of_months && Date.parse("#{var_year}-04-01") >= Date.parse(current_user.start_date.strftime("%Y-%m-01")) ) %>
+		<% @monhours = current_user.aprhours %>
+		<% @date = Date.parse("#{var_year}-04-01") %>
+		<% @newpath = new_aprhour_path %>
+		<%= render 'aprhours/aprhours_calendar' %>
+		<% var_no_of_months += 1 %>
+		<% if var_no_of_months != no_of_months %><hr> <% end %>
+	<% end %>
 
-<% @monhours = current_user.junhours %>
-<% @date = params[:year] ? Date.parse(params[:year]) : Date.parse("#{Date.today.strftime("%Y")}-06-01") %>
-<% @newpath = new_junhour_path %>
-<%= render 'junhours/junhours_calendar' %>
+	<% if (var_no_of_months < no_of_months && Date.parse("#{var_year}-05-01") >= Date.parse(current_user.start_date.strftime("%Y-%m-01")) ) %>
+		<% @monhours = current_user.mayhours %>
+		<% @date = Date.parse("#{var_year}-05-01") %>
+		<% @newpath = new_mayhour_path %>
+		<%= render 'mayhours/mayhours_calendar' %>
+		<% var_no_of_months += 1 %>
+		<% if var_no_of_months != no_of_months %><hr> <% end %>
+	<% end %>
 
-<hr>
+	<% if (var_no_of_months < no_of_months && Date.parse("#{var_year}-06-01") >= Date.parse(current_user.start_date.strftime("%Y-%m-01")) ) %>
+		<% @monhours = current_user.junhours %>
+		<% @date = Date.parse("#{var_year}-06-01") %>
+		<% @newpath = new_junhour_path %>
+		<%= render 'junhours/junhours_calendar' %>
+		<% var_no_of_months += 1 %>
+		<% if var_no_of_months != no_of_months %><hr> <% end %>
+	<% end %>
 
-<% @monhours = current_user.julhours %>
-<% @date = params[:year] ? Date.parse(params[:year]) : Date.parse("#{Date.today.strftime("%Y")}-07-01") %>
-<% @newpath = new_julhour_path %>
-<%= render 'julhours/julhours_calendar' %>
+	<% if (var_no_of_months < no_of_months && Date.parse("#{var_year}-07-01") >= Date.parse(current_user.start_date.strftime("%Y-%m-01")) ) %>
+		<% @monhours = current_user.julhours %>
+		<% @date = Date.parse("#{var_year}-07-01") %>
+		<% @newpath = new_julhour_path %>
+		<%= render 'julhours/julhours_calendar' %>
+		<% var_no_of_months += 1 %>
+		<% if var_no_of_months != no_of_months %><hr> <% end %>
+	<% end %>
 
-<hr>
+	<% if (var_no_of_months < no_of_months && Date.parse("#{var_year}-08-01") >= Date.parse(current_user.start_date.strftime("%Y-%m-01")) ) %>
+		<% @monhours = current_user.aughours %>
+		<% @date = Date.parse("#{var_year}-08-01") %>
+		<% @newpath = new_aughour_path %>
+		<%= render 'aughours/aughours_calendar' %>
+		<% var_no_of_months += 1 %>
+		<% if var_no_of_months != no_of_months %><hr> <% end %>
+	<% end %>
 
-<% @monhours = current_user.aughours %>
-<% @date = params[:year] ? Date.parse(params[:year]) : Date.parse("#{Date.today.strftime("%Y")}-08-01") %>
-<% @newpath = new_aughour_path %>
-<%= render 'aughours/aughours_calendar' %>
+	<% if (var_no_of_months < no_of_months && Date.parse("#{var_year}-09-01") >= Date.parse(current_user.start_date.strftime("%Y-%m-01")) ) %>
+		<% @monhours = current_user.sephours %>
+		<% @date = Date.parse("#{var_year}-09-01") %>
+		<% @newpath = new_sephour_path %>
+		<%= render 'sephours/sephours_calendar' %>
+		<% var_no_of_months += 1 %>
+		<% if var_no_of_months != no_of_months %><hr> <% end %>
+	<% end %>
 
-<hr>
+	<% if (var_no_of_months < no_of_months && Date.parse("#{var_year}-10-01") >= Date.parse(current_user.start_date.strftime("%Y-%m-01")) ) %>
+		<% @monhours = current_user.octhours %>
+		<% @date = Date.parse("#{var_year}-10-01") %>
+		<% @newpath = new_octhour_path %>
+		<%= render 'octhours/octhours_calendar' %>
+		<% var_no_of_months += 1 %>
+		<% if var_no_of_months != no_of_months %><hr> <% end %>
+	<% end %>
 
-<% @monhours = current_user.sephours %>
-<% @date = params[:year] ? Date.parse(params[:year]) : Date.parse("#{Date.today.strftime("%Y")}-09-01") %>
-<% @newpath = new_sephour_path %>
-<%= render 'sephours/sephours_calendar' %>
+	<% if (var_no_of_months < no_of_months && Date.parse("#{var_year}-11-01") >= Date.parse(current_user.start_date.strftime("%Y-%m-01")) ) %>
+		<% @monhours = current_user.novhours %>
+		<% @date = Date.parse("#{var_year}-11-01") %>
+		<% @newpath = new_novhour_path %>
+		<%= render 'novhours/novhours_calendar' %>
+		<% var_no_of_months += 1 %>
+		<% if var_no_of_months != no_of_months %><hr> <% end %>
+	<% end %>
 
-<hr>
+	<% if (var_no_of_months < no_of_months && Date.parse("#{var_year}-12-01") >= Date.parse(current_user.start_date.strftime("%Y-%m-01")) ) %>
+		<% @monhours = current_user.dechours %>
+		<% @date = Date.parse("#{var_year}-12-01") %>
+		<% @newpath = new_dechour_path %>
+		<%= render 'dechours/dechours_calendar' %>
+		<% var_no_of_months += 1 %>
+		<% if var_no_of_months != no_of_months %><hr> <% end %>
+	<% end %>
 
-<% @monhours = current_user.octhours %>
-<% @date = params[:year] ? Date.parse(params[:year]) : Date.parse("#{Date.today.strftime("%Y")}-10-01") %>
-<% @newpath = new_octhour_path %>
-<%= render 'octhours/octhours_calendar' %>
+<% var_year += 1 %>
 
-<hr>
-
-<% @monhours = current_user.novhours %>
-<% @date = params[:year] ? Date.parse(params[:year]) : Date.parse("#{Date.today.strftime("%Y")}-11-01") %>
-<% @newpath = new_novhour_path %>
-<%= render 'novhours/novhours_calendar' %>
-
-<hr>
-
-<% @monhours = current_user.dechours %>
-<% @date = params[:year] ? Date.parse(params[:year]) : Date.parse("#{Date.today.strftime("%Y")}-12-01") %>
-<% @newpath = new_dechour_path %>
-<%= render 'dechours/dechours_calendar' %>
+<% end %>

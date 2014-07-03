@@ -1,15 +1,19 @@
 <div id="calendar">
 	<h3 id="month">
-		<%= link_to "<", :year => (@date-1.year).strftime("%Y-%m-01") %>
-		<%= @date.strftime("%B %Y") %>
-		<%= link_to ">", :year => (@date+1.year).strftime("%Y-%m-01") %>
+		<% if params[:action] == "logs" %>
+			<%= @date.strftime("%B %Y") %>
+		<% else %>
+			<%= link_to "<", :year => (@date-1.year).strftime("%Y-%m-01") %>
+			<%= @date.strftime("%B %Y") %>
+			<%= link_to ">", :year => (@date+1.year).strftime("%Y-%m-01") %>
+		<% end %>
 	</h3>
 	
 	<%= calendar_for @monhours, :year => @date.year, :month => @date.month do |calendar| %>
 	<%= calendar.head('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday') %>
 		<% calendar.day(:day_method => :date) do |date, monhours| %>
 			<%= date.day %>
-			<% if monhours.length == 0 %>
+			<% if date >= current_user.start_date && date < Date.today+1.day && monhours.length == 0 %>
 				<ul class="unentered_hr">
 					<li><%= link_to "Add", @newpath %><li>
 				</ul>

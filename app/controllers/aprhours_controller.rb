@@ -38,7 +38,11 @@ class AprhoursController < ApplicationController
 	def index
 		@newpath = new_aprhour_path
 		@monhours = current_user.aprhours
-		@date = params[:year] ? Date.parse(params[:year]) : Date.parse("#{Date.today.strftime("%Y")}-04-01")
+		if Date.parse("#{Date.today.strftime("%Y")}-04-01") >= current_user.start_date
+			@date = params[:year] ? Date.parse(params[:year]) : Date.parse("#{Date.today.strftime("%Y")}-04-01")
+		else
+			@date = params[:year] ? Date.parse(params[:year]) : Date.parse("#{(Date.today+1.year).strftime("%Y")}-04-01")
+		end
 	end
 
 	private
