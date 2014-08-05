@@ -32,6 +32,12 @@ describe User do
 	it { should respond_to(:dechours) }
 	it { should respond_to(:admin) }
 	it { should respond_to(:start_date) }
+	it { should respond_to(:events) }
+	it { should respond_to(:attendances) }
+	it { should respond_to(:attended_events) }
+	it { should respond_to(:attending?) }
+	it { should respond_to(:attend!) }
+	it { should respond_to(:unattend!) }
 
 	it { should be_valid }
 	it { should_not be_admin }
@@ -134,5 +140,29 @@ describe User do
 		end
 
 		it { should be_admin }
+	end
+
+	describe "attending" do
+		let(:event) { FactoryGirl.create(:event) }
+		
+		before do
+			@user.save
+			@user.attend!(event)
+		end
+
+		it { should be_attending(event) }
+		its(:attended_events) { should include(event) }
+
+		describe "attended event" do
+			subject { event }
+			its(:attendees) { should include(@user) }
+		end
+
+		describe "and unattending" do
+			before { @user.unattend!(event) }
+
+			it { should_not be_attending(event) }
+			its(:attended_events) { should_not include(event) }
+		end
 	end
 end

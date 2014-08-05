@@ -1,0 +1,33 @@
+<% provide(:title, 'New Event') %>
+<h2 class="center">Create New Event</h2>
+
+<div class="row">
+	<div class="span6 offset3">
+		<div class="event-form">
+			<%= form_for(@event) do |f| %>
+
+				<%= render 'shared/error_messages', object: f.object %>
+				
+				<%= f.label :title, "Event Title" %>
+				<%= f.text_field :title %>
+
+				<%= f.label :event_date, "Date" %>
+				<%= f.date_field :event_date %>
+
+				<%= f.label :event_time, "Time" %>
+				<%= f.time_field :event_time %>
+
+				<%= f.label :venue %>
+				<%= f.text_field :venue %>
+
+				<%= f.label :description, "Event Description" %>
+				<%= f.text_field :description %>
+
+				<%= f.label :detailed_address, "Address" %>
+				<%= f.text_field :detailed_address %>
+
+				<%= f.submit "Create Event", class: "btn btn-large btn-primary btn-block" %>
+			<% end %>
+		</div>
+	</div>
+</div>

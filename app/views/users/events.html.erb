@@ -1,0 +1,21 @@
+<% provide(:title, @title) %>
+<h1>All Events</h1>
+
+<ul class="events">
+	<% @events.each do |event| %>
+		<li>
+			<div class="left">
+				<span class="event_title"><%= link_to "#{event.title}", event %></span>
+				<span class="event_title event_detail">
+					<% if !event.event_date.nil? %>
+						<%= "on #{event.event_date} " %>
+					<% end %>
+					<% if !event.event_time.nil? %>
+						<%= "at #{event.event_time.strftime("%I:%M %p")}" %>
+					<% end %>
+				</span>
+				<span class="event_detail"><%= event.venue %></span>
+			</div>
+		</li>
+	<% end %>
+</ul>

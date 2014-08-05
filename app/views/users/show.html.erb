@@ -6,6 +6,7 @@
 				<%= image_tag("atmalogo.jpg", alt: "Profile Photo", class: "pic img-circle profile-pic") %>
 				<p>Volunteer Name: <%= @user.name %></p>
 				<p>Organization: <%= Org.find(@user.org_id).org_name unless @user.org_id.blank? %></p>
+				<p>Events: <%= link_to(@user.attended_events.count, events_user_path(@user)) %></p>
 			</h1>
 		</section>
 	</aside>

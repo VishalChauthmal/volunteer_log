@@ -9,6 +9,17 @@ describe "User pages" do
 
 		it { should have_content(user.name) }
 		it { should have_title(user.name) }
+
+		describe "Events count" do
+			let(:event) { FactoryGirl.create(:event, user: user) }
+			before do
+				user.attend!(event)
+				visit user_path(user)
+			end
+
+			it { should have_content('Events') }
+			it { should have_link("1", href: events_user_path(user)) }
+		end
 	end
 
 	describe "Signup page" do
@@ -167,5 +178,20 @@ describe "User pages" do
 			it { should have_content('Fill In Your Log') }
 			it { should have_title('New Log Entry') }
 		end
+	end
+
+	describe "Attended Events page" do
+		let(:user) { FactoryGirl.create(:user) }
+		let(:event) { FactoryGirl.create(:event, user: user) }
+
+		before do
+			sign_in user
+			user.attend!(event)
+			visit events_user_path(user)
+		end
+
+		it { should have_title('Events') }
+		it { should have_content('Events') }
+		it { should have_link(event.title, href: event_path(event)) }
 	end
 end

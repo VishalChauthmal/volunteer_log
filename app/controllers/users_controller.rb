@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-	before_action :signed_in_user, only: [:edit, :update, :index]
+	before_action :signed_in_user, only: [:edit, :update, :index, :destroy, :events]
 	before_action :correct_user, only: [:edit, :update]
 	before_action :admin_user, only: [:destroy]
 
@@ -52,12 +52,20 @@ class UsersController < ApplicationController
 	end
 
 	def logs
+		@user = params[:id] ? User.find(params[:id]) : current_user
 	end
 
 	def destroy
 		User.find_by(params[:id]).destroy
 		flash[:success] = "The user is deleted."
 		redirect_to users_path
+	end
+
+	def events
+		@title = "Events"
+		@user = User.find(params[:id])
+		@events = @user.attended_events
+		render 'events'
 	end
 
 	private

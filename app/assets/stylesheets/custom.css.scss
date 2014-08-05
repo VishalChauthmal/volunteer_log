@@ -189,9 +189,9 @@ input {
 }
 
 
-/* users (index action) */
+/* users & events (index action) */
 
-.users {
+.users, .events {
 	list-style: none;
 	margin: 0;
 	li {
@@ -343,4 +343,35 @@ input {
 	p {
 		text-align: center;
 	}
+}
+
+.event-form {
+	background-color: #F5F5F5;
+	border: 1px solid #D3D3D3;
+	margin: 10px 20px 0px 20px;
+	padding: 30px 40px 15px 40px;
+}
+
+/* Events (index earlier) */
+.event_title {
+	display: block;
+}
+
+.event_detail {
+	color: $grayLight;
+}
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
+.event_box {
+	background-color: #F5F5F5;
+	border: 1px solid #D3D3D3;
+	margin: 20px 80px;
+	padding: 20px 65px 35px 65px;
 }

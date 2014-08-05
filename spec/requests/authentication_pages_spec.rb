@@ -74,6 +74,33 @@ describe "Authentication" do
 					before { patch user_path(user) }
 					specify { expect(response).to redirect_to(signin_path) }
 				end
+
+				describe "visiting the attended events page" do
+					before { visit events_user_path(user) }
+					it { should have_title('Sign In') }
+				end
+			end
+
+			describe "in the Events controller" do
+
+				let(:event) { FactoryGirl.create(:event) }
+
+				describe "visiting the attendees page" do
+					before { visit attendees_event_path(event) }
+					it { should have_title('Sign In') }
+				end
+			end
+
+			describe "in the Attendances controller" do
+				describe "submitting to the create action" do
+					before { post attendances_path }
+					specify { expect(response).to redirect_to(signin_path) }
+				end
+
+				describe "submitting to the destroy action" do
+					before { delete attendance_path(1) }
+					specify { expect(response).to redirect_to(signin_path) }
+				end
 			end
 		end
 

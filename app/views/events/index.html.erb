@@ -1,0 +1,52 @@
+<% provide(:title, 'All Events') %>
+<h2 class='center'>All Events</h2>
+
+<div id="calendar">
+	<h3 id="month">
+		<%= link_to "<", :month => (@date.beginning_of_month-1).strftime("%Y-%m-01") %>
+		<%= @date.strftime("%B %Y") %>
+		<%= link_to ">", :month => (@date.end_of_month+1).strftime("%Y-%m-01") %>
+	</h3>
+	
+	<%= calendar_for @events, :year => @date.year, :month => @date.month do |calendar| %>
+	<%= calendar.head('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday') %>
+		<% calendar.day(:day_method => :event_date) do |date, events| %>
+			<%= date.day %>
+				<ul>
+					<% for event in events %>
+							<li>
+								<%= link_to event.title, event %>
+							</li>
+					<% end %>
+				</ul>
+		<% end %>
+	<% end %>
+</div>
+
+
+
+
+
+<ul class="events">
+	<% @events.each do |event| %>
+		<li>
+			<div class="left">
+				<span class="event_title"><%= link_to "#{event.title}", event %></span>
+				<span class="event_title event_detail">
+					<% if !event.event_date.nil? %>
+						<%= "on #{event.event_date} " %>
+					<% end %>
+					<% if !event.event_time.nil? %>
+						<%= "at #{event.event_time.strftime("%I:%M %p")}" %>
+					<% end %>
+				</span>
+				<span class="event_detail"><%= event.venue %></span>
+			</div>
+			
+			<div class="right">
+				<%= link_to "Edit", edit_event_path(event) %>
+				<%= link_to "Delete", event, method: :delete, data: { confirm: "Are you sure you want to delete the event - #{event.title}?" } %>
+			</div>
+		</li>
+	<% end %>
+</ul>

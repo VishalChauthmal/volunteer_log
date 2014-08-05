@@ -14,6 +14,9 @@ class User < ActiveRecord::Base
 	has_many :octhours
 	has_many :novhours
 	has_many :dechours
+	has_many :events
+	has_many :attendances, foreign_key: "attendee_id", dependent: :destroy
+	has_many :attended_events, through: :attendances, source: :event
 
 	validates :name, presence: true, length: { maximum: 50 }
 	VALID_EMAIL_REGEX = /\A[\w\-.]+@(atma)[a-zA-Z\.]+\Z/i
@@ -35,6 +38,18 @@ class User < ActiveRecord::Base
 
 	def User.digest(token)
 		Digest::SHA1.hexdigest(token.to_s)
+	end
+
+	def attending?(event)
+		self.attendances.find_by(event_id: event.id)
+	end
+
+	def attend!(event)
+		self.attendances.create!(event_id: event.id)
+	end
+
+	def unattend!(event)
+		self.attendances.find_by(event_id: event.id).destroy
 	end
 
 	private

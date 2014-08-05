@@ -1,5 +1,12 @@
 VolunteerApp::Application.routes.draw do
 
+  resources :attendances, only: [:create, :destroy]
+  #resources :events
+  resources :events do
+    member do
+      get :attendees
+    end
+  end
   resources :dechours
   resources :novhours
   resources :octhours
@@ -14,7 +21,12 @@ VolunteerApp::Application.routes.draw do
   resources :febhours
   resources :janhours
   resources :orgs
-  resources :users
+  #resources :users
+  resources :users do
+    member do
+      get :logs, :events
+    end
+  end
   resources :sessions, only: [:new, :create, :destroy]
   
   root 'static_pages#home'

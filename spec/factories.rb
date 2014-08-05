@@ -14,4 +14,13 @@ FactoryGirl.define do
 	factory :org do
 		sequence(:org_name) { |n| "Org #{n}" }
 	end
+
+	factory :event do
+		event_date "2014-09-05"
+		event_time "10:15:00"
+		venue "Atma Office"
+		title "Vol Professional Meet"
+		description "Something"
+		user #Could be asking for trouble with tests
+	end
 end

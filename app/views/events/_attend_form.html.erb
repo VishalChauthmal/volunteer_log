@@ -1,0 +1,11 @@
+<% if current_user.attending?(@event) %>
+	<%= form_for(current_user.attendances.find_by(event_id: @event.id),
+       	     html: { method: :delete }) do |f| %>
+		<%= f.submit "Unattend", class: "btn btn-primary" %>
+	<% end %>
+<% else %>
+	<%= form_for(current_user.attendances.build(event_id: @event.id)) do |f| %>
+		<div><%= f.hidden_field :event_id %></div>
+		<%= f.submit "Attend", class: "btn btn-primary" %>
+	<% end %>
+<% end %>

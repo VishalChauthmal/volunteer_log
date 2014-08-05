@@ -1,7 +1,7 @@
 <% provide(:title, 'All Logs') %>
 <h1>All Logs</h1>
 
-<% var_date = Date.parse(current_user.start_date.strftime("%Y-%m-01")) %>
+<% var_date = Date.parse(@user.start_date.strftime("%Y-%m-01")) %>
 <% no_of_months = 0 %>
 
 <% while (var_date <= Date.today) do %>
@@ -10,14 +10,14 @@
 <% end %>
 
 
-<% var_year = current_user.start_date.strftime("%Y").to_i %>
+<% var_year = @user.start_date.strftime("%Y").to_i %>
 <% var_no_of_months = 0 %>
 
 
 <% while (var_year <= Date.today.strftime("%Y").to_i) do %>
 
-	<% if (var_no_of_months < no_of_months && Date.parse("#{var_year}-01-01") >= Date.parse(current_user.start_date.strftime("%Y-%m-01")) ) %>
-		<% @monhours = current_user.janhours %>
+	<% if (var_no_of_months < no_of_months && Date.parse("#{var_year}-01-01") >= Date.parse(@user.start_date.strftime("%Y-%m-01")) ) %>
+		<% @monhours = @user.janhours %>
 		<% @date = Date.parse("#{var_year}-01-01") %>
 		<% @newpath = new_janhour_path %>
 		<%= render 'janhours/janhours_calendar' %>
@@ -25,8 +25,8 @@
 		<% if var_no_of_months != no_of_months %><hr> <% end %>
 	<% end %>
 
-	<% if (var_no_of_months < no_of_months && Date.parse("#{var_year}-02-01") >= Date.parse(current_user.start_date.strftime("%Y-%m-01")) ) %>
-		<% @monhours = current_user.febhours %>
+	<% if (var_no_of_months < no_of_months && Date.parse("#{var_year}-02-01") >= Date.parse(@user.start_date.strftime("%Y-%m-01")) ) %>
+		<% @monhours = @user.febhours %>
 		<% @date = Date.parse("#{var_year}-02-01") %>
 		<% @newpath = new_febhour_path %>
 		<%= render 'febhours/febhours_calendar' %>
@@ -34,8 +34,8 @@
 		<% if var_no_of_months != no_of_months %><hr> <% end %>
 	<% end %>
 
-	<% if (var_no_of_months < no_of_months && Date.parse("#{var_year}-03-01") >= Date.parse(current_user.start_date.strftime("%Y-%m-01")) ) %>
-		<% @monhours = current_user.marhours %>
+	<% if (var_no_of_months < no_of_months && Date.parse("#{var_year}-03-01") >= Date.parse(@user.start_date.strftime("%Y-%m-01")) ) %>
+		<% @monhours = @user.marhours %>
 		<% @date = Date.parse("#{var_year}-03-01") %>
 		<% @newpath = new_marhour_path %>
 		<%= render 'marhours/marhours_calendar' %>
@@ -43,8 +43,8 @@
 		<% if var_no_of_months != no_of_months %><hr> <% end %>
 	<% end %>
 
-	<% if (var_no_of_months < no_of_months && Date.parse("#{var_year}-04-01") >= Date.parse(current_user.start_date.strftime("%Y-%m-01")) ) %>
-		<% @monhours = current_user.aprhours %>
+	<% if (var_no_of_months < no_of_months && Date.parse("#{var_year}-04-01") >= Date.parse(@user.start_date.strftime("%Y-%m-01")) ) %>
+		<% @monhours = @user.aprhours %>
 		<% @date = Date.parse("#{var_year}-04-01") %>
 		<% @newpath = new_aprhour_path %>
 		<%= render 'aprhours/aprhours_calendar' %>
@@ -52,8 +52,8 @@
 		<% if var_no_of_months != no_of_months %><hr> <% end %>
 	<% end %>
 
-	<% if (var_no_of_months < no_of_months && Date.parse("#{var_year}-05-01") >= Date.parse(current_user.start_date.strftime("%Y-%m-01")) ) %>
-		<% @monhours = current_user.mayhours %>
+	<% if (var_no_of_months < no_of_months && Date.parse("#{var_year}-05-01") >= Date.parse(@user.start_date.strftime("%Y-%m-01")) ) %>
+		<% @monhours = @user.mayhours %>
 		<% @date = Date.parse("#{var_year}-05-01") %>
 		<% @newpath = new_mayhour_path %>
 		<%= render 'mayhours/mayhours_calendar' %>
@@ -61,8 +61,8 @@
 		<% if var_no_of_months != no_of_months %><hr> <% end %>
 	<% end %>
 
-	<% if (var_no_of_months < no_of_months && Date.parse("#{var_year}-06-01") >= Date.parse(current_user.start_date.strftime("%Y-%m-01")) ) %>
-		<% @monhours = current_user.junhours %>
+	<% if (var_no_of_months < no_of_months && Date.parse("#{var_year}-06-01") >= Date.parse(@user.start_date.strftime("%Y-%m-01")) ) %>
+		<% @monhours = @user.junhours %>
 		<% @date = Date.parse("#{var_year}-06-01") %>
 		<% @newpath = new_junhour_path %>
 		<%= render 'junhours/junhours_calendar' %>
@@ -70,8 +70,8 @@
 		<% if var_no_of_months != no_of_months %><hr> <% end %>
 	<% end %>
 
-	<% if (var_no_of_months < no_of_months && Date.parse("#{var_year}-07-01") >= Date.parse(current_user.start_date.strftime("%Y-%m-01")) ) %>
-		<% @monhours = current_user.julhours %>
+	<% if (var_no_of_months < no_of_months && Date.parse("#{var_year}-07-01") >= Date.parse(@user.start_date.strftime("%Y-%m-01")) ) %>
+		<% @monhours = @user.julhours %>
 		<% @date = Date.parse("#{var_year}-07-01") %>
 		<% @newpath = new_julhour_path %>
 		<%= render 'julhours/julhours_calendar' %>
@@ -79,8 +79,8 @@
 		<% if var_no_of_months != no_of_months %><hr> <% end %>
 	<% end %>
 
-	<% if (var_no_of_months < no_of_months && Date.parse("#{var_year}-08-01") >= Date.parse(current_user.start_date.strftime("%Y-%m-01")) ) %>
-		<% @monhours = current_user.aughours %>
+	<% if (var_no_of_months < no_of_months && Date.parse("#{var_year}-08-01") >= Date.parse(@user.start_date.strftime("%Y-%m-01")) ) %>
+		<% @monhours = @user.aughours %>
 		<% @date = Date.parse("#{var_year}-08-01") %>
 		<% @newpath = new_aughour_path %>
 		<%= render 'aughours/aughours_calendar' %>
@@ -88,8 +88,8 @@
 		<% if var_no_of_months != no_of_months %><hr> <% end %>
 	<% end %>
 
-	<% if (var_no_of_months < no_of_months && Date.parse("#{var_year}-09-01") >= Date.parse(current_user.start_date.strftime("%Y-%m-01")) ) %>
-		<% @monhours = current_user.sephours %>
+	<% if (var_no_of_months < no_of_months && Date.parse("#{var_year}-09-01") >= Date.parse(@user.start_date.strftime("%Y-%m-01")) ) %>
+		<% @monhours = @user.sephours %>
 		<% @date = Date.parse("#{var_year}-09-01") %>
 		<% @newpath = new_sephour_path %>
 		<%= render 'sephours/sephours_calendar' %>
@@ -97,8 +97,8 @@
 		<% if var_no_of_months != no_of_months %><hr> <% end %>
 	<% end %>
 
-	<% if (var_no_of_months < no_of_months && Date.parse("#{var_year}-10-01") >= Date.parse(current_user.start_date.strftime("%Y-%m-01")) ) %>
-		<% @monhours = current_user.octhours %>
+	<% if (var_no_of_months < no_of_months && Date.parse("#{var_year}-10-01") >= Date.parse(@user.start_date.strftime("%Y-%m-01")) ) %>
+		<% @monhours = @user.octhours %>
 		<% @date = Date.parse("#{var_year}-10-01") %>
 		<% @newpath = new_octhour_path %>
 		<%= render 'octhours/octhours_calendar' %>
@@ -106,8 +106,8 @@
 		<% if var_no_of_months != no_of_months %><hr> <% end %>
 	<% end %>
 
-	<% if (var_no_of_months < no_of_months && Date.parse("#{var_year}-11-01") >= Date.parse(current_user.start_date.strftime("%Y-%m-01")) ) %>
-		<% @monhours = current_user.novhours %>
+	<% if (var_no_of_months < no_of_months && Date.parse("#{var_year}-11-01") >= Date.parse(@user.start_date.strftime("%Y-%m-01")) ) %>
+		<% @monhours = @user.novhours %>
 		<% @date = Date.parse("#{var_year}-11-01") %>
 		<% @newpath = new_novhour_path %>
 		<%= render 'novhours/novhours_calendar' %>
@@ -115,8 +115,8 @@
 		<% if var_no_of_months != no_of_months %><hr> <% end %>
 	<% end %>
 
-	<% if (var_no_of_months < no_of_months && Date.parse("#{var_year}-12-01") >= Date.parse(current_user.start_date.strftime("%Y-%m-01")) ) %>
-		<% @monhours = current_user.dechours %>
+	<% if (var_no_of_months < no_of_months && Date.parse("#{var_year}-12-01") >= Date.parse(@user.start_date.strftime("%Y-%m-01")) ) %>
+		<% @monhours = @user.dechours %>
 		<% @date = Date.parse("#{var_year}-12-01") %>
 		<% @newpath = new_dechour_path %>
 		<%= render 'dechours/dechours_calendar' %>

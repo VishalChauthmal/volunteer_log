@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140702083953) do
+ActiveRecord::Schema.define(version: 20140805073818) do
 
   create_table "aprhours", force: true do |t|
     t.integer  "user_id"
@@ -24,6 +24,17 @@ ActiveRecord::Schema.define(version: 20140702083953) do
   add_index "aprhours", ["date"], name: "index_aprhours_on_date"
   add_index "aprhours", ["user_id", "date"], name: "index_aprhours_on_user_id_and_date", unique: true
   add_index "aprhours", ["user_id"], name: "index_aprhours_on_user_id"
+
+  create_table "attendances", force: true do |t|
+    t.integer  "attendee_id"
+    t.integer  "event_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "attendances", ["attendee_id", "event_id"], name: "index_attendances_on_attendee_id_and_event_id", unique: true
+  add_index "attendances", ["attendee_id"], name: "index_attendances_on_attendee_id"
+  add_index "attendances", ["event_id"], name: "index_attendances_on_event_id"
 
   create_table "aughours", force: true do |t|
     t.integer  "user_id"
@@ -48,6 +59,18 @@ ActiveRecord::Schema.define(version: 20140702083953) do
   add_index "dechours", ["date"], name: "index_dechours_on_date"
   add_index "dechours", ["user_id", "date"], name: "index_dechours_on_user_id_and_date", unique: true
   add_index "dechours", ["user_id"], name: "index_dechours_on_user_id"
+
+  create_table "events", force: true do |t|
+    t.date     "event_date"
+    t.time     "event_time"
+    t.string   "venue"
+    t.integer  "user_id"
+    t.string   "title"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "detailed_address"
+  end
 
   create_table "febhours", force: true do |t|
     t.integer  "user_id"

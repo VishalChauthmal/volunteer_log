@@ -38,7 +38,7 @@ class JanhoursController < ApplicationController
 	def index
 		@newpath = new_janhour_path
 		@monhours = current_user.janhours
-		if Date.parse("#{Date.today.strftime("%Y")}-01-01") >= current_user.start_date
+		if Date.parse("#{Date.today.strftime("%Y")}-01-01") >= Date.parse("#{current_user.start_date.strftime("%Y-%m")}-01")
 			@date = params[:year] ? Date.parse(params[:year]) : Date.parse("#{Date.today.strftime("%Y")}-01-01")
 		else
 			@date = params[:year] ? Date.parse(params[:year]) : Date.parse("#{(Date.today+1.year).strftime("%Y")}-01-01")			

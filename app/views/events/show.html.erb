@@ -1,0 +1,32 @@
+<% provide(:title, "Event | #{@event.title}") %>
+
+<h2 class="center">Event</h2>
+
+<div class="event_box center">
+	<h2 class=""><%= @event.title %></h2>
+	<p>
+		<% if !@event.event_date.nil? %>
+			<%= "On #{@event.event_date}" %>
+		<% end %>
+		<% if !@event.event_time.nil? %>
+			<%= "at #{@event.event_time.strftime("%I:%M %p")}" %>
+		<% end %>
+	</p>
+	<p>
+		<% if !@event.venue.blank? %>
+			<%= "Venue: #{@event.venue}" %>
+		<% end %>
+	</p>
+	<p><%= @event.description %></p>
+	<p>
+		<% if !@event.detailed_address.blank? %>
+			<%= "Address: #{@event.detailed_address}" %>
+		<% end %>
+	</p>
+	<%= render 'attend_form' %>
+	<%= link_to pluralize(@event.attendees.count, "Attendee"), attendees_event_path(@event), 
+																class: "btn btn-primary" %>
+	<%= link_to "Edit", edit_event_path(@event), class: "btn btn-primary" %>
+	<%= link_to "Delete", @event, class: "btn btn-primary", method: :delete, 
+															data: { confirm: "Are you sure?" } %>
+</div>

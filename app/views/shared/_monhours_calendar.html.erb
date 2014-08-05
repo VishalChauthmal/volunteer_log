@@ -15,13 +15,15 @@
 			<%= date.day %>
 			<% if date >= current_user.start_date && date < Date.today+1.day && monhours.length == 0 %>
 				<ul class="unentered_hr">
-					<li><%= link_to "Add", @newpath %><li>
+					<% if params[:id].nil? || current_user == User.find(params[:id]) %>
+						<li><%= link_to "Add", @newpath %><li>
+					<% end %>
 				</ul>
 			<% else %>
 				<ul>
 					<% for @monhour in monhours %>
 							<li class="entered_hr">
-								<%= link_to @monhour.numhours, editpath(@monhour) %>
+								<%= link_to @monhour.numhours, params[:id].nil? || current_user == User.find(params[:id]) ? editpath(@monhour) : '#' %>
 							</li>
 					<% end %>
 				</ul>
