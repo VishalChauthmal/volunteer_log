@@ -1,6 +1,6 @@
 class OrgsController < ApplicationController
 	
-	before_action :signed_in_user, only: [:new, :create, :edit, :update]
+	before_action :signed_in_user
 
 	def new
 		@org = Org.new
@@ -32,6 +32,15 @@ class OrgsController < ApplicationController
 		else
 			render 'edit'
 		end
+	end
+
+	def index
+		@orgs = Org.all
+	end
+
+	def destroy
+		flash[:alert] = "Sorry! Deleting an organization is not advisable."
+		redirect_to users_path
 	end
 
 	private

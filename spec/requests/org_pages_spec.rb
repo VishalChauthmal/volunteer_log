@@ -65,4 +65,27 @@ describe "Org Pages" do
 			end
 		end
 	end
+
+	describe "index page" do
+		let(:org) { FactoryGirl.create(:org) }
+		let(:user) { FactoryGirl.create(:user) }
+
+		describe "without user signing in " do
+			before { visit orgs_path }
+
+			it { should have_title('Sign In') }
+			it { should have_content('Sign In') }
+		end
+
+		describe "with a signed-in user" do
+			before do
+				sign_in user
+				visit orgs_path
+			end
+
+			it { should have_title('All Organizations') }
+			it { should have_selector('h2', text: 'All Organizations') }
+			it { should have_content(org.org_name) }
+		end
+	end
 end
